@@ -1,99 +1,101 @@
 # SQL + Power BI Sales Insights Dashboard
 
-This project delivers an end-to-end analytics pipeline using MS SQL Server and Power BI, built on top of a large synthetic dataset (~10,000 customers, ~100,000 orders, ~200,000 order items).  
-The goal is to demonstrate skills in database design, SQL analytics, data modeling, and interactive dashboard development.
+A complete end-to-end analytics project built using **MS SQL Server** and **Power BI**, designed to showcase real-world data modeling, ETL, SQL analytics, and interactive dashboard development.  
+The dataset includes large-scale synthetic data (~10k customers, ~100k orders, ~200k order items), enabling realistic business insights.
 
 ---
 
 ## 📁 Project Structure
+
+```
 sql-powerbi-sales-insights/
 │
 ├── database/
-│ ├── create_tables.sql -- Schema + relationships
-│ ├── insert_data.sql -- Bulk synthetic data generator
-│ └── queries.sql -- Analytical SQL queries
+│   ├── create_tables.sql         # Schema + relationships
+│   ├── insert_data.sql           # Bulk synthetic data generator
+│   └── queries.sql               # Analytical SQL queries
 │
 ├── powerbi/
-│ └── sales_insights.pbix -- Final dashboard
+│   └── sales_insights.pbix       # Final Power BI dashboard
 │
 └── exports/
-├── dashboard_overview.png
-├── product_insights.png
-├── region_heatmap.png
+    ├── dashboard_overview.png
+    ├── product_insights.png
+    └── region_heatmap.png
+```
 
 ---
 
 ## 🗂 Database Schema
 
 ### Dimension Tables
-- `dim_customer` – customer profile & region segmentation  
-- `dim_product` – product catalog, category & subcategory  
+- **dim_customer** – customer profile, region, and segmentation  
+- **dim_product** – product catalog with category and subcategory  
 
 ### Fact Tables
-- `fact_order` – order-level details (date, customer)  
-- `fact_order_item` – item-level details (quantity, price, revenue)
+- **fact_order** – order-level details (date, customer, status)  
+- **fact_order_item** – item-level details (quantity, unit price, discount, revenue)
 
-Dataset Size:
-- ~10K customers  
+**Dataset Size:**
+- ~10,000 customers  
 - ~50 products  
-- ~100K orders  
-- ~200K order items  
+- ~100,000 orders  
+- ~200,000 order items  
 
 ---
 
-## 🧠 Key SQL Insights
+## 🧠 SQL Analytics Performed
 
-### • Revenue Analysis
+### Revenue Analysis
 - Total revenue  
-- Revenue by month  
-- Revenue by region  
+- Monthly revenue trends  
+- Regional performance  
 - Revenue by customer segment  
 
-### • Product Performance
-- Top 10 products  
-- Revenue by category/subcategory  
+### Product Insights
+- Top 10 high-revenue products  
+- Category & subcategory contribution  
 
-### • Customer Insights
-- High-value customers  
-- Segment breakdown  
+### Customer Insights
+- Customer segmentation  
+- Identifying high-value segments  
 
-### • Metrics
-- Average Order Value (AOV)  
-- Monthly growth trends  
+### Key Metrics
+- **AOV (Average Order Value)**  
+- **Revenue growth patterns**
 
-All SQL scripts are included in `/database`.
+All SQL scripts are provided inside `/database`.
 
 ---
 
 ## 📊 Power BI Dashboard
 
-The dashboard includes:
+### **Page 1 — Executive Overview**
+- KPIs: Total Revenue, AOV  
+- Revenue trend over time  
+- Region-wise performance  
+- Customer segment distribution  
+- Filters: Month, Region, Category  
 
-### Page 1 — Executive Overview
-- KPIs: Total Revenue, Total Orders, AOV  
-- Monthly revenue trend  
-- Region performance  
-- Customer segment breakdown  
+### **Page 2 — Product Insights**
+- Top 10 products by revenue  
+- Treemap: Category & subcategory revenue  
 
-### Page 2 — Product Insights
-- Top 10 products  
-- Category and subcategory analysis  
+### **Page 3 — Regional Heatmap**
+- Region × Month revenue matrix  
+- Highlights seasonal + geographical trends  
 
-### Page 3 — Regional Heatmap
-- Region × Month matrix  
-- Filters for region, category, segment  
-
-Exported screenshots are available in `/exports`.
+Screenshots are available in `/exports`.
 
 ---
 
 ## 🚀 Tools Used
-- MS SQL Server
-- SQL Server Management Studio (SSMS)
-- Power BI Desktop
-- GitHub for version control
+- **MS SQL Server**
+- **SQL Server Management Studio (SSMS)**
+- **Power BI Desktop**
+- **Git & GitHub**
 
 ---
 
 ## 📬 Contact
-For questions or improvements, feel free to reach out.
+For questions or collaboration inquiries, feel free to reach out.
