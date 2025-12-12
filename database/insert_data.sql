@@ -1,13 +1,3 @@
-------------------------------------------------------------
--- Bulk data generation script for SalesInsightsDB
--- Target volume (Option B):
--- ~10,000 customers
--- ~100,000 orders
--- ~200,000 order items
--- Assumes the following tables already exist:
---   dim_customer, dim_product, fact_order, fact_order_item
-------------------------------------------------------------
-
 SET NOCOUNT ON;
 
 ------------------------------------------------------------

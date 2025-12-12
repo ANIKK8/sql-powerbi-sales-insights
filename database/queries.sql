@@ -6,7 +6,12 @@ FROM dbo.fact_order_item oi
 SELECT 
 	YEAR(o.order_date) AS Year,
 	MONTH(o.order_date) AS Month,
-	SUM(oi.line_amount) AS Renenue
+	 CONCAT(
+        YEAR(o.order_date), 
+        '-', 
+        RIGHT('0' + CAST(MONTH(o.order_date) AS VARCHAR(2)), 2)
+    ) AS YearMonth,
+	SUM(oi.line_amount) AS Revenue
 FROM 
 	dbo.fact_order o INNER JOIN dbo.fact_order_item oi
 	ON oi.order_id = o.order_id
@@ -53,21 +58,29 @@ ORDER BY Revenue DESC
 
 --AOV
 SELECT 
-	AVG(line_amount) 
-FROM 
-	dbo.fact_order_item
+    SUM(oi.line_amount) / COUNT(DISTINCT o.order_id) AS AvgOrderValue
+FROM dbo.fact_order_item oi
+INNER JOIN dbo.fact_order o
+    ON oi.order_id = o.order_id;
 
 --Revenue heatmap
 SELECT 
-	CONCAT(YEAR(order_date),'-',MONTH(order_date)) AS  Month,
-	c.region AS Region,
-	SUM(oi.line_amount) AS Revenue
-FROM 
-	dbo.fact_order o INNER JOIN dbo.dim_customer c
-	ON c.customer_id = o.customer_id
-	INNER JOIN dbo.fact_order_item oi
-	ON oi.order_id = o.order_id
+    CONCAT(
+        YEAR(o.order_date), 
+        '-', 
+        RIGHT('0' + CAST(MONTH(o.order_date) AS VARCHAR(2)), 2)
+    ) AS YearMonth,
+    c.region AS Region,
+    SUM(oi.line_amount) AS Revenue
+FROM dbo.fact_order o INNER JOIN dbo.dim_customer c
+    ON c.customer_id = o.customer_id
+INNER JOIN dbo.fact_order_item oi
+    ON oi.order_id = o.order_id
 GROUP BY 
-	CONCAT(YEAR(order_date),'-',MONTH(order_date)),
-	c.region
-ORDER BY Month
+    CONCAT(
+        YEAR(o.order_date), 
+        '-', 
+        RIGHT('0' + CAST(MONTH(o.order_date) AS VARCHAR(2)), 2)
+    ),
+    c.region
+ORDER BY YearMonth, Region;
